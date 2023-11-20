@@ -7,6 +7,8 @@ class Window():
     
     def CreateWindow(self):
         self.root = tkinter.Tk()
+        self.root.geometry("600x900")
+        self.root.title("Game Window")
         self.root.mainloop()
 
 main = Window()
