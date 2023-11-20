@@ -1,6 +1,7 @@
 import time
 import tkinter
 import threading
+import pytest
 
 data = {
     "clicks": 0,
