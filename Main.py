@@ -1,3 +1,4 @@
+import time
 import tkinter
 import threading
 
@@ -9,7 +10,13 @@ data = {
 
 class Window():
     def __init__(self):
+        self.CPSLoop = threading.Thread(target=self.CPSFunc)
         self.CreateWindow()
+    
+    def CPSFunc(self):
+        if data["CPS"] > 0:
+            data["clicks"] += data["CPS"]
+            time.sleep(1)
     
     def CreateWindow(self):
         self.root = tkinter.Tk()
