@@ -8,6 +8,8 @@ data = {
     "clicks": 0,
     "CPS": 1,
     "CPC": 1,
+    "CPCCost": 25,
+    "CPSCost": 50,
 }
 
 class Window():
