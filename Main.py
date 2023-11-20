@@ -4,7 +4,7 @@ import threading
 
 data = {
     "clicks": 0,
-    "CPS": 0,
+    "CPS": 1,
     "CPC": 1,
 }
 
@@ -14,9 +14,11 @@ class Window():
         self.CreateWindow()
     
     def CPSFunc(self):
-        if data["CPS"] > 0:
-            data["clicks"] += data["CPS"]
-            time.sleep(1)
+        while True:
+            if data["CPS"] > 0:
+                data["clicks"] += data["CPS"]
+                self.update()
+                time.sleep(1)
     
     def CreateWindow(self):
         self.root = tkinter.Tk()
@@ -28,6 +30,7 @@ class Window():
         # Packing all of items onto the screen
         self.clickDisplay.pack()
         self.clickButton.pack()
+        self.CPSLoop.start()
         self.root.mainloop()
     
     def clicked(self):
