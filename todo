@@ -1,3 +1,5 @@
-- Add upgrades
+- Add upgrades (DONE)
 - Add saving feature
 - Add multiplayer mode (Maybe)
+- Split the window script into a second script
+- Give myself more customisation in the main.py script
