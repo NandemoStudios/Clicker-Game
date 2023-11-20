@@ -1,8 +1,6 @@
 import time
 import tkinter
 import threading
-import cProfile
-import re
 
 data = {
     "clicks": 0,
