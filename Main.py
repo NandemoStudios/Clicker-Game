@@ -2,6 +2,7 @@
 import tkinter
 import threading
 import time
+import random
 
 data = {
     "clicks": 0,
@@ -46,14 +47,14 @@ class Window():
         if data["clicks"] >= data["CPCPrice"]:
             data["CPC"] += 1
             data["clicks"] -= data["CPCPrice"]
-            data["CPCPrice"] = data["CPCPrice"] * 2
+            data["CPCPrice"] = data["CPCPrice"] * round((random.randint(200, 300)/100))
             self.UpgradesUpdate()
 
     def CPSUpgraded(self):
         if data["clicks"] >= data["CPSPrice"]:
             data["CPS"] += 1
             data["clicks"] -= data["CPSPrice"]
-            data["CPSPrice"] = data["CPSPrice"] * 2
+            data["CPSPrice"] = data["CPSPrice"] * round((random.randint(200, 300)/100))
             self.UpgradesUpdate()
     
     def Clicked(self):
