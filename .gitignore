@@ -5,3 +5,6 @@
 /.vs
 /SaveData
 /__pycache__
+/dist/Main
+/build/Main
+/Main.spec
