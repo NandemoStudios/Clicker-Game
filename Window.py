@@ -46,7 +46,7 @@ class Window():
         self.ClickButton = tkinter.Button(self.root, text="Click Me!", command=self.Clicked)
         self.CPCDisplay = tkinter.Label(self.root, text="Clicks Per Click: 1")
         self.CPSDisplay = tkinter.Label(self.root, text="Clicks Per Second: 0")
-        self.UpgradesButton = tkinter.Button(self.root, text="Open Upgrades", command=self.OpenUpgrades)
+        self.UpgradesButton = tkinter.Button(self.root, text="Open Upgrades", command=self.CallUpgradeThread)
         self.SaveButton = tkinter.Button(self.root, text="Save", command=self.Save)
         self.LoadButton = tkinter.Button(self.root, text="Load", command=self.Load)
         
@@ -87,6 +87,10 @@ class Window():
         self.CPCUpgrade.config(text="CPCUpgrade: "+str(self.data["CPCPrice"])+" Clicks")
         self.CPSUpgrade.config(text="CPSUpgrade: "+str(self.data["CPSPrice"])+" Clicks")
         self.DisplayUpdate()
+    
+    def CallUpgradeThread(self):
+        self.updateThread = threading.Thread(target=self.OpenUpgrades)
+        self.updateThread.start()
      
     def OpenUpgrades(self):
         self.uproot = tkinter.Tk()
