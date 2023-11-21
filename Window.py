@@ -41,7 +41,7 @@ class Window():
     
     def buildWindowParts(self):
         self.root = tkinter.Tk()
-        self.root.geometry = ("600x900")
+        self.root.geometry("900x600")
         
         self.clickDisplay = tkinter.Label(self.root, text="Clicks: 0")
         self.ClickButton = tkinter.Button(self.root, text="Click Me!", command=self.Clicked)
@@ -51,14 +51,16 @@ class Window():
         self.SaveButton = tkinter.Button(self.root, text="Save", command=self.Save)
         self.LoadButton = tkinter.Button(self.root, text="Load", command=self.Load)
         
-        self.clickDisplay.pack()
-        self.ClickButton.pack()
+        self.clickDisplay.grid(row=0, column=0, sticky='nesw')
+        self.ClickButton.grid(row=1, column=0, sticky='nesw')
+        self.CPCDisplay.grid(row=2, column=0, sticky='nesw')
+        self.CPSDisplay.grid(row=2, column=1, sticky='nesw')
+        self.UpgradesButton.grid(row=3, column=0, sticky='nesw')
+        self.SaveButton.grid(row=4, column=0, sticky='nesw')
+        self.LoadButton.grid(row=4, column=1, sticky='nesw')
+        
         self.CPSThread.start()
-        self.UpgradesButton.pack()
-        self.CPCDisplay.pack()
-        self.CPSDisplay.pack()
-        self.SaveButton.pack()
-        self.LoadButton.pack()
+
         self.root.mainloop()
         
     def CPCUpgraded(self):

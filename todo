@@ -1,5 +1,7 @@
-- Add upgrades (DONE)
-- Add saving feature (DONE)
 - Add multiplayer mode (Maybe)
-- Split the window script into a second script (DONE)
-- Give myself more customisation in the main.py script
+- Add more customisation for the player
+
+DONE:
+- Add Upgrades
+- Add Saving and loading
+- Split the window class into a seperate file
