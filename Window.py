@@ -7,9 +7,7 @@ import os
 class Window():
     
     def __init__(self, data):
-        self.CPSThread = threading.Thread(target=self.CPSLoop)
         self.data = data
-        self.buildWindowParts()
     
     def Save(self):
         savefile = open("SaveData", 'w+')
@@ -58,8 +56,6 @@ class Window():
         self.UpgradesButton.grid(row=3, column=0, sticky='nesw')
         self.SaveButton.grid(row=4, column=0, sticky='nesw')
         self.LoadButton.grid(row=4, column=1, sticky='nesw')
-        
-        self.CPSThread.start()
 
         self.root.mainloop()
         

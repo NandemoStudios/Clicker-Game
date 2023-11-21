@@ -1,4 +1,5 @@
 import Window
+import threading
 
 data = {
     "clicks": 0,
@@ -9,3 +10,6 @@ data = {
 }
 
 game = Window.Window(data)
+CPSThread = threading.Thread(target=game.CPSLoop)
+CPSThread.start()
+game.buildWindowParts()
