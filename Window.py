@@ -32,7 +32,8 @@ class Window():
      
     def CPSLoop(self):
         while True:
-            if self.data["CPS"] > 1:
+            if self.data["CPS"] >= 1:
+                print("More than one")
                 self.data["clicks"] += self.data["CPS"]
                 time.sleep(1)
                 self.DisplayUpdate()
@@ -49,11 +50,11 @@ class Window():
         self.SaveButton = tkinter.Button(self.root, text="Save", command=self.Save)
         self.LoadButton = tkinter.Button(self.root, text="Load", command=self.Load)
         
-        self.clickDisplay.grid(row=0, column=0, sticky='nesw')
-        self.ClickButton.grid(row=1, column=0, sticky='nesw')
+        self.clickDisplay.grid(row=0, column=0, sticky='nesw', columnspan=2)
+        self.ClickButton.grid(row=1, column=0, sticky='nesw', columnspan=2)
         self.CPCDisplay.grid(row=2, column=0, sticky='nesw')
         self.CPSDisplay.grid(row=2, column=1, sticky='nesw')
-        self.UpgradesButton.grid(row=3, column=0, sticky='nesw')
+        self.UpgradesButton.grid(row=3, column=0, sticky='nesw', columnspan=2)
         self.SaveButton.grid(row=4, column=0, sticky='nesw')
         self.LoadButton.grid(row=4, column=1, sticky='nesw')
 
@@ -99,3 +100,4 @@ class Window():
         self.CloseButton.pack()
 
         self.uproot.mainloop()
+        self.UpgradesUpdate()
