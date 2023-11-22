@@ -18,6 +18,11 @@ This is a clicker game made using the Python Tkinter library.
 - Intergrated Threading, allowing for smoother experience
 - Added saving and loading system
 
+## V0.2.1-Alpha
+- Added toolbar
+- Added background color
+- Changed threads to Daemon to allow program to close properly
+  
 ## Coming in v0.3.0-Alpha
 - Multiplayer System (Might be moved back to V0.4.0-Alpha)
 - UI customisation (Color themes, font changes, font size changes ect.)
