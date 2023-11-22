@@ -14,7 +14,7 @@ This is a clicker game made using the Python Tkinter library.
 
 ## V0.2.0-Alpha
 - Added upgrades for CPS (Clicks per second) and CPC (Clicks Per Click)
-- Overhauled OS
+- Overhauled UI
 - Intergrated Threading, allowing for smoother experience
 - Added saving and loading system
 
