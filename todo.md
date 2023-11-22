@@ -1,6 +1,7 @@
 # Coming Soon
 - Add multiplayer mode (Maybe)
 - Add more customisation for the player
+- Use a better method than Daemon for killing threads, to protect from crashes on exit
 
 # Done
 - Add Upgrades
