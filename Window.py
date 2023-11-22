@@ -1,3 +1,5 @@
+from cProfile import label
+from pickle import FALSE
 import tkinter
 import threading
 import time
@@ -49,6 +51,15 @@ class Window():
         self.UpgradesButton = tkinter.Button(self.root, text="Open Upgrades", command=self.CallUpgradeThread)
         self.SaveButton = tkinter.Button(self.root, text="Save", command=self.Save)
         self.LoadButton = tkinter.Button(self.root, text="Load", command=self.Load)
+        # Add the toolbar
+        self.toolbar = tkinter.Menu(self.root)
+        self.game_menu = tkinter.Menu(self.toolbar, tearoff=False)
+        self.game_menu.add_command(label="Save", command=self.Save, accelerator="Ctrl+S")
+        self.game_menu.add_command(label="Load", command=self.Load, accelerator="Crtl+L")
+        self.game_menu.add_separator()
+        self.game_menu.add_command(label="Exit", command=quit)
+        self.toolbar.add_cascade(label="Game", menu=self.game_menu)
+        self.root.config(menu=self.toolbar)
         
         self.clickDisplay.grid(row=0, column=0, sticky='nesw', columnspan=2)
         self.ClickButton.grid(row=1, column=0, sticky='nesw', columnspan=2)
