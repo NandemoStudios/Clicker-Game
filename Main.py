@@ -12,6 +12,6 @@ data = {
 # Then it starts the CPS loop
 # Then it tells the window to display using the buildWindowParts function from Window.py
 game = Window.Window(data)
-CPSThread = threading.Thread(target=game.CPSLoop, daemon=True)
+CPSThread = threading.Thread(target=game.CPSLoop)
 CPSThread.start()
 game.buildWindowParts()

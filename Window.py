@@ -11,6 +11,7 @@ class Window():
         self.data = data
         self.backgroundcolor = 'gray'
         self.buttoncolor = 'gray'
+        self.isClosed = False
     # Writes each part of the data to a new line
     def Save(self):
         savefile = open("SaveData", 'w+')
@@ -37,7 +38,7 @@ class Window():
      # Checks if the CPS value is not 0
      # Then increases clicks by CPS, then waits a second
     def CPSLoop(self):
-        while True:
+        while self.isClosed == False:
             if self.data["CPS"] >= 1:
                 self.data["clicks"] += self.data["CPS"]
                 time.sleep(1)
@@ -62,21 +63,23 @@ class Window():
         self.game_menu.add_command(label="Save", command=self.Save, accelerator="Ctrl+S")
         self.game_menu.add_command(label="Load", command=self.Load, accelerator="Crtl+L")
         self.game_menu.add_separator()
-        self.game_menu.add_command(label="Exit", command=self.root.destroy)
+        self.game_menu.add_command(label="Exit", command=self.closeGame)
         self.toolbar.add_cascade(label="Game", menu=self.game_menu)
         self.root.config(menu=self.toolbar)
         # Add all of the elements onto the screen in their respective places
         self.canvas.place(x=0, y=0, relwidth=1.0, relheight=1.0)
-        self.clickDisplay.grid(row=0, column=0, sticky='nesw', columnspan=2)
-        self.ClickButton.grid(row=1, column=0, sticky='nesw', columnspan=2)
-        self.CPCDisplay.grid(row=2, column=0, sticky='nesw')
-        self.CPSDisplay.grid(row=2, column=1, sticky='nesw')
-        self.UpgradesButton.grid(row=3, column=0, sticky='nesw', columnspan=2)
-        self.SaveButton.grid(row=4, column=0, sticky='nesw')
-        self.LoadButton.grid(row=4, column=1, sticky='nesw')
+        self.clickDisplay.grid(row=0, column=0, sticky='NESW', columnspan=2)
+        self.ClickButton.grid(row=1, column=0, sticky='NESW', columnspan=2)
+        self.CPCDisplay.grid(row=2, column=0, sticky='NESW')
+        self.CPSDisplay.grid(row=2, column=1, sticky='NESW')
+        self.UpgradesButton.grid(row=3, column=0, sticky='NESW', columnspan=2)
+        self.SaveButton.grid(row=4, column=0, sticky='NESW')
+        self.LoadButton.grid(row=4, column=1, sticky='NESW')
         # Start the window
         self.root.mainloop()
-        
+    def CloseGame(self):
+        self.isClosed = True
+        self.root.destroy
     def CPCUpgraded(self):
         # Check if the player has enough money, if so, give them the upgrade and take the price away
         if self.data["clicks"] >= self.data["CPCPrice"]:
@@ -96,7 +99,6 @@ class Window():
     def Clicked(self):
         self.data["clicks"] += self.data["CPC"]
         self.DisplayUpdate()
-
     # This is what changes the values on screen to their new values
     def DisplayUpdate(self):
         self.clickDisplay.config(text="Clicks: "+str(self.data["clicks"]))
