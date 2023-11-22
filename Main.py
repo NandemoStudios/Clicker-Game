@@ -10,6 +10,6 @@ data = {
 }
 
 game = Window.Window(data)
-CPSThread = threading.Thread(target=game.CPSLoop)
+CPSThread = threading.Thread(target=game.CPSLoop, daemon=True)
 CPSThread.start()
 game.buildWindowParts()

@@ -57,7 +57,7 @@ class Window():
         self.game_menu.add_command(label="Save", command=self.Save, accelerator="Ctrl+S")
         self.game_menu.add_command(label="Load", command=self.Load, accelerator="Crtl+L")
         self.game_menu.add_separator()
-        self.game_menu.add_command(label="Exit", command=self.root.quit)
+        self.game_menu.add_command(label="Exit", command=self.root.destroy)
         self.toolbar.add_cascade(label="Game", menu=self.game_menu)
         self.root.config(menu=self.toolbar)
         
@@ -100,7 +100,7 @@ class Window():
         self.DisplayUpdate()
     
     def CallUpgradeThread(self):
-        self.updateThread = threading.Thread(target=self.OpenUpgrades)
+        self.updateThread = threading.Thread(target=self.OpenUpgrades, daemon=True)
         self.updateThread.start()
      
     def OpenUpgrades(self):
