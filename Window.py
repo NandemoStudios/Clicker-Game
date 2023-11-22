@@ -1,4 +1,5 @@
 import tkinter
+import tkinter.ttk
 import threading
 import time
 import random
@@ -8,6 +9,8 @@ class Window():
     # Runs when class called, just defines the data argument and thats it
     def __init__(self, data):
         self.data = data
+        self.backgroundcolor = 'gray'
+        self.buttoncolor = 'gray'
     # Writes each part of the data to a new line
     def Save(self):
         savefile = open("SaveData", 'w+')
@@ -36,7 +39,6 @@ class Window():
     def CPSLoop(self):
         while True:
             if self.data["CPS"] >= 1:
-                print("More than one")
                 self.data["clicks"] += self.data["CPS"]
                 time.sleep(1)
                 self.DisplayUpdate()
@@ -44,16 +46,18 @@ class Window():
     def buildWindowParts(self):
         self.root = tkinter.Tk()
         self.root.geometry("900x600")
+        # Creating a canvas to allow the background to be changed color
+        self.canvas = tkinter.Canvas(self.root, bg=self.backgroundcolor)
         # Define all of the elements that go onto the screen
-        self.clickDisplay = tkinter.Label(self.root, text="Clicks: 0")
-        self.ClickButton = tkinter.Button(self.root, text="Click Me!", command=self.Clicked)
-        self.CPCDisplay = tkinter.Label(self.root, text="Clicks Per Click: 1")
-        self.CPSDisplay = tkinter.Label(self.root, text="Clicks Per Second: 0")
-        self.UpgradesButton = tkinter.Button(self.root, text="Open Upgrades", command=self.CallUpgradeThread)
-        self.SaveButton = tkinter.Button(self.root, text="Save", command=self.Save)
-        self.LoadButton = tkinter.Button(self.root, text="Load", command=self.Load)
+        self.clickDisplay = tkinter.Label(self.root, text="Clicks: 0", bg=self.backgroundcolor)
+        self.ClickButton = tkinter.Button(self.root, text="Click Me!", command=self.Clicked, bg=self.buttoncolor)
+        self.CPCDisplay = tkinter.Label(self.root, text="Clicks Per Click: 1", bg=self.backgroundcolor)
+        self.CPSDisplay = tkinter.Label(self.root, text="Clicks Per Second: 0", bg=self.backgroundcolor)
+        self.UpgradesButton = tkinter.Button(self.root, text="Open Upgrades", command=self.CallUpgradeThread, bg=self.buttoncolor)
+        self.SaveButton = tkinter.Button(self.root, text="Save", command=self.Save, bg=self.buttoncolor)
+        self.LoadButton = tkinter.Button(self.root, text="Load", command=self.Load, bg=self.buttoncolor)
         # Add the toolbar
-        self.toolbar = tkinter.Menu(self.root)
+        self.toolbar = tkinter.Menu(self.root, bg=self.backgroundcolor)
         self.game_menu = tkinter.Menu(self.toolbar, tearoff=False)
         self.game_menu.add_command(label="Save", command=self.Save, accelerator="Ctrl+S")
         self.game_menu.add_command(label="Load", command=self.Load, accelerator="Crtl+L")
@@ -62,6 +66,7 @@ class Window():
         self.toolbar.add_cascade(label="Game", menu=self.game_menu)
         self.root.config(menu=self.toolbar)
         # Add all of the elements onto the screen in their respective places
+        self.canvas.place(x=0, y=0, relwidth=1.0, relheight=1.0)
         self.clickDisplay.grid(row=0, column=0, sticky='nesw', columnspan=2)
         self.ClickButton.grid(row=1, column=0, sticky='nesw', columnspan=2)
         self.CPCDisplay.grid(row=2, column=0, sticky='nesw')
