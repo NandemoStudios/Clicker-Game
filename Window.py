@@ -137,11 +137,13 @@ class Window():
         # If they are not refreshed when the window is made
         self.uproot.mainloop()
         self.UpgradesUpdate()
+        # Gets the settings that have been selected, and applies them
     def ApplySettings(self):
         settings["BackgroundColour"] = self.BackgroundColourList.get(self.BackgroundColourList.curselection())
         settings["ButtonColour"] = settings["BackgroundColour"]
         self.root.destroy()
         self.buildWindowParts()
+        # Creates the settings window, and opens it
     def OpenSettings(self):
         self.setroot = tkinter.Tk()
         self.BackgroundColourList = tkinter.Listbox(self.setroot)
