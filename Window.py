@@ -5,12 +5,17 @@ import time
 import random
 import os
 
+settings = {
+    'BackgroundColour': 'gray',
+    'ButtonColour': 'gray',
+}
+
+colours = ['gray', 'black', 'white']
+
 class Window():
     # Runs when class called, just defines the data argument and thats it
     def __init__(self, data):
         self.data = data
-        self.backgroundcolor = 'gray'
-        self.buttoncolor = 'gray'
         self.isClosed = False
     # Writes each part of the data to a new line
     def Save(self):
@@ -48,22 +53,24 @@ class Window():
         self.root = tkinter.Tk()
         self.root.geometry("900x600")
         # Creating a canvas to allow the background to be changed color
-        self.canvas = tkinter.Canvas(self.root, bg=self.backgroundcolor)
+        self.canvas = tkinter.Canvas(self.root, bg=settings["BackgroundColour"])
         # Define all of the elements that go onto the screen
-        self.clickDisplay = tkinter.Label(self.root, text="Clicks: 0", bg=self.backgroundcolor)
-        self.ClickButton = tkinter.Button(self.root, text="Click Me!", command=self.Clicked, bg=self.buttoncolor)
-        self.CPCDisplay = tkinter.Label(self.root, text="Clicks Per Click: 1", bg=self.backgroundcolor)
-        self.CPSDisplay = tkinter.Label(self.root, text="Clicks Per Second: 0", bg=self.backgroundcolor)
-        self.UpgradesButton = tkinter.Button(self.root, text="Open Upgrades", command=self.CallUpgradeThread, bg=self.buttoncolor)
-        self.SaveButton = tkinter.Button(self.root, text="Save", command=self.Save, bg=self.buttoncolor)
-        self.LoadButton = tkinter.Button(self.root, text="Load", command=self.Load, bg=self.buttoncolor)
+        self.clickDisplay = tkinter.Label(self.root, text="Clicks: 0", bg=settings["BackgroundColour"])
+        self.ClickButton = tkinter.Button(self.root, text="Click Me!", command=self.Clicked, bg=settings["ButtonColour"])
+        self.CPCDisplay = tkinter.Label(self.root, text="Clicks Per Click: 1", bg=settings["BackgroundColour"])
+        self.CPSDisplay = tkinter.Label(self.root, text="Clicks Per Second: 0", bg=settings["BackgroundColour"])
+        self.UpgradesButton = tkinter.Button(self.root, text="Open Upgrades", command=self.CallUpgradeThread, bg=settings["ButtonColour"])
+        self.SaveButton = tkinter.Button(self.root, text="Save", command=self.Save, bg=settings["ButtonColour"])
+        self.LoadButton = tkinter.Button(self.root, text="Load", command=self.Load, bg=settings["ButtonColour"])
         # Add the toolbar
-        self.toolbar = tkinter.Menu(self.root, bg=self.backgroundcolor)
+        self.toolbar = tkinter.Menu(self.root, bg=settings["BackgroundColour"])
         self.game_menu = tkinter.Menu(self.toolbar, tearoff=False)
         self.game_menu.add_command(label="Save", command=self.Save, accelerator="Ctrl+S")
         self.game_menu.add_command(label="Load", command=self.Load, accelerator="Crtl+L")
         self.game_menu.add_separator()
-        self.game_menu.add_command(label="Exit", command=self.closeGame)
+        self.game_menu.add_command(label="Settings", command=self.OpenSettings)
+        self.game_menu.add_separator()
+        self.game_menu.add_command(label="Exit", command=self.CloseGame)
         self.toolbar.add_cascade(label="Game", menu=self.game_menu)
         self.root.config(menu=self.toolbar)
         # Add all of the elements onto the screen in their respective places
@@ -130,3 +137,18 @@ class Window():
         # If they are not refreshed when the window is made
         self.uproot.mainloop()
         self.UpgradesUpdate()
+    def ApplySettings(self):
+        settings["BackgroundColour"] = self.BackgroundColourList.get(self.BackgroundColourList.curselection())
+        settings["ButtonColour"] = settings["BackgroundColour"]
+        self.root.destroy()
+        self.buildWindowParts()
+    def OpenSettings(self):
+        self.setroot = tkinter.Tk()
+        self.BackgroundColourList = tkinter.Listbox(self.setroot)
+        self.BackgroundColourList.insert(1, 'gray')
+        self.BackgroundColourList.insert(2, 'black')
+        self.BackgroundColourList.insert(3, 'white')
+        self.ApplyButton = tkinter.Button(self.setroot, text="Apply", command=self.ApplySettings)
+        self.BackgroundColourList.pack()
+        self.ApplyButton.pack()
+        self.setroot.mainloop()
